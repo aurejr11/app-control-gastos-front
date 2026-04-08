@@ -1,7 +1,37 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { end_points } from '../services/api'
 const Login = () => {
   const [getEmail, setEmail] = useState("")
   const [getPassword, setPassword] = useState("")
+  const [users, setUsers] = useState([])
+
+  function getUsers() {
+    fetch(end_points.users)
+      .then((response) => response.json())
+      .then((data) => setUsers(data))
+  }
+
+  useEffect(() => {
+    getUsers()
+  }, [])
+
+  function findUser() {
+    let auth = users.find((item) => getEmail == item.email && getPassword == item.password)
+    return auth
+  }
+
+  function signIn() {
+    let user = findUser()
+    if (user) {
+      alert("Bienvenido al sistema " + user.nombres)
+    } else {
+      alert("Error de credenciales...")
+    }
+  }
+
+
+  console.log(users)
+
   return (
     <div>
       <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
@@ -25,7 +55,7 @@ const Login = () => {
                     Email
                   </label>
                 </div>
-                <input class="flex w-full rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-3 text-sm ring-offset-white placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006600] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" placeholder="Email" type="email" />
+                <input onChange={(e) => setEmail(e.target.value)} class="flex w-full rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-3 text-sm ring-offset-white placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006600] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" placeholder="Email" type="email" />
               </div>
               <div class="flex flex-col gap-2">
                 <div class="flex items-center justify-between">
@@ -33,10 +63,10 @@ const Login = () => {
                     Password
                   </label>
                 </div>
-                <input class="flex w-full rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-3 text-sm ring-offset-white placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006600] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" placeholder="••••••••" type="password" />
+                <input onChange={(e) => setPassword(e.target.value)} class="flex w-full rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-3 text-sm ring-offset-white placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006600] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" placeholder="••••••••" type="password" />
               </div>
               <div class="flex flex-col gap-4 pt-4">
-                <button type="button" class="inline-flex items-center justify-center rounded-lg bg-[#006600] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#006600]/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006600] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
+                <button onClick={signIn} type="button" class="inline-flex items-center justify-center rounded-lg bg-[#006600] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#006600]/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006600] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
                   Log In
                 </button>
               </div>
