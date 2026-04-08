@@ -1,4 +1,7 @@
+import { useState } from "react"
 const Login = () => {
+  const [getEmail, setEmail] = useState("")
+  const [getPassword, setPassword] = useState("")
   return (
     <div>
       <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
