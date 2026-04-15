@@ -1,4 +1,8 @@
+import { getLocalStorage, removeLocalStorage } from '../helpers/local-storage'
+import { redirectAlert } from '../helpers/alerts'
+
 const Dashboard = () => {
+  let user = getLocalStorage("user")
   return (
     <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-slate-50 dark:bg-slate-950">
       <header class="border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/60 backdrop-blur">
@@ -10,8 +14,8 @@ const Dashboard = () => {
               </svg>
             </div>
             <div class="flex flex-col leading-tight">
-              <span class="text-slate-900 dark:text-slate-100 text-sm font-semibold">Expense Tracker</span>
-              <span class="text-slate-600 dark:text-slate-400 text-xs">Dashboard</span>
+              <span class="text-slate-900 dark:text-slate-100 text-sm font-semibold">{user.nombres}</span>
+              <span class="text-slate-600 dark:text-slate-400 text-xs">{user.documento}</span>
             </div>
           </div>
           <div class="flex items-center gap-2">

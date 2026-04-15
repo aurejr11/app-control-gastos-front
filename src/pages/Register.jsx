@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 const Register = () => {
   return (
     <div>
@@ -57,7 +58,7 @@ const Register = () => {
             <footer class="text-center">
               <p class="text-sm text-slate-600 dark:text-slate-400">
                 Already have an account?
-                <a class="font-semibold text-[#006600] hover:underline ml-1" href="#">Sign in</a>
+                <Link class="font-semibold text-[#006600] hover:underline ml-1" to="/">Sign in</Link>
               </p>
             </footer>
           </div>

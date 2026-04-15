@@ -23,5 +23,5 @@ export function redirectAlert(title, message, icon, url) {
 }
 
 export function generalAlert() {
-
+    
 }
