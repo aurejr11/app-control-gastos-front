@@ -203,7 +203,7 @@ const Expenses = () => {
                       {item.fecha}
                     </td>
                     <td class="px-5 py-4">
-                      <span class="text-red-500 font-bold">$ 1.580.000</span>
+                      <span class="text-red-500 font-bold">$ {item.valor}</span>
                     </td>
                     <td class="px-5 py-4">
                       <span class="inline-flex items-center rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-1 text-xs font-semibold text-slate-700 dark:text-slate-200">
@@ -211,16 +211,16 @@ const Expenses = () => {
                       </span>
                     </td>
                     <td class="px-5 py-4 text-slate-700 dark:text-slate-200">
-                      1
+                      {item.usuarioId}
                     </td>
                     <td class="px-5 py-4 text-slate-700 dark:text-slate-200">
-                      104
+                      {item.medioPagoId}
                     </td>
                     <td class="px-5 py-4 text-slate-700 dark:text-slate-200">
-                      201
+                      {item.comercioId}
                     </td>
                     <td class="px-5 py-4 text-slate-700 dark:text-slate-200">
-                      303
+                      {item.categoriaId}
                     </td>
                     <td class="px-5 py-4">
                       <div class="flex items-center gap-2">
