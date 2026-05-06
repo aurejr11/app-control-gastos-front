@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { end_points } from "../services/api";
+import Swal from "sweetalert2";
 import { getLocalStorage, removeLocalStorage } from "../helpers/local-storage";
 import { Link } from "react-router-dom";
 const Expenses = () => {
@@ -16,6 +17,34 @@ const Expenses = () => {
   useEffect(() => {
     fetchExpenses();
   }, []);
+
+  function deleteExpense(id) {
+    Swal.fire({
+      title: "Está seguro/a?",
+      text: "Esta acción no se peude revertir",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, Eliminar!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Eliminado!",
+          text: "El gasto se eliminó correctamente.",
+          icon: "success",
+        });
+        fetch(end_points.expenses + id, {
+          method: "DELETE",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            fetchExpenses();
+          });
+      }
+    });
+  }
 
   console.log(getExpenses);
 
@@ -231,8 +260,8 @@ const Expenses = () => {
                           Editar
                         </Link>
                         <button
+                          onClick={() => deleteExpense(item.id)}
                           type="button"
-                          disabled
                           class="inline-flex items-center justify-center rounded-lg bg-red-500 px-3 py-2 text-xs font-bold text-white disabled:pointer-events-none disabled:opacity-50"
                         >
                           Eliminar
