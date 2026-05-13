@@ -4,11 +4,29 @@ import { useState, useEffect } from "react";
 
 const EditExpense = () => {
   const [getExpense, setExpense] = useState({});
+  const [descripcion, setDescripcion] = useState("");
+  const [fecha, setFecha] = useState("");
+  const [valor, setValor] = useState(0);
+  const [imagen, setImagen] = useState("");
+  const [usuarioId, setUsuarioId] = useState("");
+  const [medioPagoId, setMedioPagoId] = useState("");
+  const [comercioId, setComercioId] = useState("");
+  const [categoriaId, setCategoriaId] = useState("");
   let { id } = useParams();
   function fetchExpenses() {
     fetch(end_points.expenses + id)
       .then((reponse) => reponse.json())
-      .then((data) => setExpense(data));
+      .then((data) => {
+        setExpense(data);
+        setDescripcion(data.descripcion)
+        setFecha(data.fecha)
+        setValor(data.valor)
+        setImagen(data.imagen)
+        setUsuarioId(data.usuarioId)
+        setMedioPagoId(data.medioPagoId)
+        setComercioId(data.comercioId)
+        setCategoriaId(data.categoriaId)
+      });
   }
   useEffect(() => {
     fetchExpenses();
@@ -90,6 +108,7 @@ const EditExpense = () => {
                   class="flex w-full rounded-lg border border-slate-200 dark:border-slate-800 bg-white  px-4 py-3 text-sm ring-offset-white placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006600] focus-visible:ring-offset-2"
                   placeholder="Descripción"
                   type="text"
+                  value={descripcion}
                 />
               </div>
 
@@ -101,6 +120,7 @@ const EditExpense = () => {
                   defaultValue="2026-03-02"
                   class="flex w-full rounded-lg border border-slate-200 dark:border-slate-800 bg-white  px-4 py-3 text-sm ring-offset-white placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006600] focus-visible:ring-offset-2"
                   type="date"
+                  value={fecha}
                 />
               </div>
 
@@ -109,7 +129,7 @@ const EditExpense = () => {
                   Valor
                 </label>
                 <input
-                  defaultValue={1580000}
+                  value={valor}
                   class="flex w-full rounded-lg border border-slate-200 dark:border-slate-800 bg-white  px-4 py-3 text-sm ring-offset-white placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006600] focus-visible:ring-offset-2"
                   placeholder="Valor"
                   type="number"
@@ -121,7 +141,7 @@ const EditExpense = () => {
                   Imagen (texto)
                 </label>
                 <input
-                  defaultValue="ic-server"
+                  value={imagen}
                   class="flex w-full rounded-lg border border-slate-200 dark:border-slate-800 bg-white  px-4 py-3 text-sm ring-offset-white placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006600] focus-visible:ring-offset-2"
                   placeholder="ic-server"
                   type="text"
@@ -144,7 +164,7 @@ const EditExpense = () => {
                   Usuario ID
                 </label>
                 <input
-                  defaultValue={1}
+                  value={usuarioId}
                   class="flex w-full rounded-lg border border-slate-200 dark:border-slate-800 bg-white  px-4 py-3 text-sm ring-offset-white placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006600] focus-visible:ring-offset-2"
                   placeholder="1"
                   type="number"
@@ -156,7 +176,7 @@ const EditExpense = () => {
                   Medio de pago ID
                 </label>
                 <input
-                  defaultValue={104}
+                  value={medioPagoId}
                   class="flex w-full rounded-lg border border-slate-200 dark:border-slate-800 bg-white  px-4 py-3 text-sm ring-offset-white placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006600] focus-visible:ring-offset-2"
                   placeholder="104"
                   type="number"
@@ -168,7 +188,7 @@ const EditExpense = () => {
                   Comercio ID
                 </label>
                 <input
-                  defaultValue={201}
+                  value={comercioId}
                   class="flex w-full rounded-lg border border-slate-200 dark:border-slate-800 bg-white px-4 py-3 text-sm ring-offset-white placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006600] focus-visible:ring-offset-2"
                   placeholder="201"
                   type="number"
@@ -180,7 +200,7 @@ const EditExpense = () => {
                   Categoría ID
                 </label>
                 <input
-                  defaultValue={303}
+                  value={categoriaId}
                   class="flex w-full rounded-lg border border-slate-200 dark:border-slate-800 bg-white px-4 py-3 text-sm ring-offset-white placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006600] focus-visible:ring-offset-2"
                   placeholder="303"
                   type="number"
