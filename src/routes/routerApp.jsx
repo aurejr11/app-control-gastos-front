@@ -22,7 +22,7 @@ export let routerApp = [
     element: <Expenses />,
   },
   {
-    path: "/edit-expense",
+    path: "/edit-expense/:id",
     element: <EditExpense />,
   },
   {
